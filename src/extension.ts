@@ -2,7 +2,6 @@ import * as vscode from 'vscode'
 
 
 export function activate(extensionContext: vscode.ExtensionContext) {
-
     console.log('"complete-statement" is activated.')
 
     const disposable: vscode.Disposable =
@@ -23,7 +22,7 @@ function complete_statement(textEditor: vscode.TextEditor,
 {
     let current_line_number: number = textEditor.selection.start.line
     let current_line: vscode.TextLine = textEditor.document.lineAt(current_line_number)
-    
+
     // Get indentation level here for use with either
     // new lines after semicolon or new block of code.
     // Assuming use spaces to indent.
@@ -47,7 +46,7 @@ function complete_statement(textEditor: vscode.TextEditor,
             return false
         }
     }
-    
+
     if (current_line.text.trim() === '}')
     {
         vscode.commands.executeCommand('cursorMove', {'to': 'up'})
@@ -84,11 +83,11 @@ function complete_statement(textEditor: vscode.TextEditor,
                 }
                 textEditorEdit.insert(current_line.range.end, braces)
             }
-            
+
             // After completion, vscode will move the cursor to the end of the added text
             // if the cursor is currently at the end of the line, otherwise the cursor
             // stays on the current line.
-            // Figure out is_at_end here. 
+            // Figure out is_at_end here.
             // Move the cursor into the newly created block.
             if (is_at_end()) {
                 vscode.commands.executeCommand('cursorMove', {'to': 'up'})
@@ -115,7 +114,6 @@ function complete_statement(textEditor: vscode.TextEditor,
         }
     }
 }
-
 
 function looks_like_complex_structure(line: vscode.TextLine): boolean
 {
