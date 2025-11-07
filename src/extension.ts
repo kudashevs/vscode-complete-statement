@@ -24,9 +24,8 @@ function complete_statement(textEditor: vscode.TextEditor,
     let current_line_number: number = textEditor.selection.start.line
     let current_line: vscode.TextLine = textEditor.document.lineAt(current_line_number)
 
-    // Get indentation level here for use with either
-    // new lines after semicolon or new block of code.
-    // Assuming use spaces to indent.
+    // Get indentation level here for use with either new lines after semicolon
+    // or a new block of code. Assuming spaces are used for the indentation.
     const tab_stop: number = vscode.workspace.getConfiguration('editor').get('tabSize', 4)
     let indent_level: number = 0
     if (current_line.text.startsWith(' ')) // indented
